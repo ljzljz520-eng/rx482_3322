@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>陪诊客户工作台</title>
+  <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">医疗陪诊 · 客服工作台</p>
+      <h1>客户与回访</h1>
+    </div>
+    <span class="status">内存模式 · 确定性日志</span>
+  </header>
+  <main class="layout">
+    <section class="panel form-panel">
+      <div class="panel-heading"><h2>新增客户</h2><span>即时保存</span></div>
+      <form id="customer-form">
+        <label>客户姓名<input name="name" required></label>
+        <label>手机号<input name="phone" inputmode="tel" required></label>
+        <label>患者姓名<input name="patient_name" required></label>
+        <label>关系<select name="relationship"><option>本人</option><option>子女</option><option>配偶</option><option>其他</option></select></label>
+        <label>服务城市<input name="service_city" required placeholder="例如：上海"></label>
+        <label>回访时间<input name="follow_up_at" type="datetime-local"></label>
+        <label>备注<textarea name="note" rows="3"></textarea></label>
+        <button type="submit">保存客户</button>
+      </form>
+      <p id="form-message" class="message" aria-live="polite"></p>
+    </section>
+    <section class="panel list-panel">
+      <div class="panel-heading"><h2>客户档案</h2><button id="refresh" class="secondary">刷新</button></div>
+      <div id="customer-list" class="table-wrap"></div>
+    </section>
+    <section class="panel import-panel">
+      <div class="panel-heading"><h2>工作簿导入</h2><span>预览后提交</span></div>
+      <p class="hint">粘贴 JSON 数组，每条记录包含 name、phone、patient_name、relationship、service_city、follow_up_at、note。</p>
+      <textarea id="import-input" rows="8" spellcheck="false">[
+  {"name":"示例客户","phone":"13800000000","patient_name":"示例患者","relationship":"本人","service_city":"上海","follow_up_at":"2026-09-01T09:00:00+08:00","note":""}
+]</textarea>
+      <div class="actions"><button id="preview-import">预览重复手机号</button><button id="commit-import" class="secondary" disabled>提交导入</button></div>
+      <div id="preview-result" class="preview-result" aria-live="polite"></div>
+    </section>
+    <section class="panel log-panel">
+      <div class="panel-heading"><h2>操作日志</h2><button id="refresh-logs" class="secondary">刷新</button></div>
+      <ol id="log-list" class="log-list"></ol>
+    </section>
+  </main>
+  <script type="module" src="/assets/app.js"></script>
+</body>
+</html>
