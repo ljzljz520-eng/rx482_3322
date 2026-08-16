@@ -200,7 +200,7 @@ func (s *CustomerService) Logs() []OperationLog {
 func (s *CustomerService) PreviewImport(records []CustomerImportRecord) ImportPreview {
 	preview := ImportPreview{Records: append([]CustomerImportRecord(nil), records...)}
 
-	var phoneCounts map[string]int
+	phoneCounts := make(map[string]int, len(records))
 	for _, record := range records {
 		phoneCounts[record.Phone]++
 	}
